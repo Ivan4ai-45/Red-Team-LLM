@@ -1,4 +1,4 @@
-+#!/bin/bash
+#!/bin/bash
 # install_garak.sh
 # Этот скрипт устанавливает Garak в новом виртуальном окружении Python.
 
