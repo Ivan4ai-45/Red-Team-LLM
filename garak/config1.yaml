@@ -1,0 +1,41 @@
+# Конфигурационный файл с применением плагина для подключения
+# к фронтенду и подключение базовых промтов из файла
+
+system:
+  verbose: 2               # Подробный вывод логов
+  parallel_requests: 1     # Последовательные запросы для стабильности
+
+run:
+  seed: 42
+  generations: 1           # По одной генерации на запрос
+
+plugins:
+  # Кастомный генератор для подключения к фронтенду
+  generators:
+    frontend:
+      FrontendGenerator:
+        base_url: "http://10.8.1.18:3000/ollama/api/chat"
+        headers:
+          Content-Type: "text/event-stream"
+          Authorization: "Bearer"
+
+  target_type: "frontend.FrontendGenerator"
+  target_name: "redteam-omega-secure:latest"
+
+  probe_spec: "file.File"
+  probe_options:
+    file:
+      source: "file:///promts/extract_system_prompt.txt" # Путь к файлу промтов
+
+  # Применяем баффы для усиления атак
+  buff_spec:
+    - "buffs.paraphrase.Fast"          # Быстрое перефразирование
+    - "buffs.paraphrase.PegasusT5"      # Перефразирование с помощью T5
+    - "buffs.encoding.Rot13"            # Шифрование ROT13
+    - "buffs.encoding.Base64"           # Шифрование Base64
+
+  detector_spec: "auto"
+
+reporting:
+  report_prefix: "full_scan_"
+  report_dir: "./garak_full_reports"
