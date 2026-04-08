@@ -1,0 +1,45 @@
+attacker_model:
+  name: redteam-omega-secure:latest
+  model: OllamaModel
+  params:
+    base_url: http://localhost:11434
+    temperature: 0.7
+
+response_model:
+  name: redteam-omega-secure:latest
+  model: OllamaModel
+  params:
+    base_url: http://localhost:11434
+    temperature: 0.2
+
+evaluation_model:
+  name: qwen2.5-mail-v1:latest
+  model: OllamaModel
+  params:
+    base_url: http://localhost:11434
+    temperature: 0.0
+
+attacks:
+  - DANAttack
+  - SimpleInstructionsAttack
+  - Base64OutputAttack
+  - ContextSwitchingAttack
+
+evaluator:
+  name: WildGuardGPTRuEvaluator
+
+base_prompts_file: datasets/jailbreak_heavens.txt
+
+attack_prompts_file: results/attacks/attack_prompts.csv
+model_responses_file: results/responses/model_responses.csv
+
+output_format: csv
+
+stages:
+  create_attack_prompts: true
+  get_model_responses: true
+  evaluate_responses: true
+  generate_report: true
+
+output_dir: results
+timestamp_format: "%Y%m%d_%H%M%S"

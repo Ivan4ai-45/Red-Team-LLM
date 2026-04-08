@@ -1,0 +1,34 @@
+system:
+  verbose: 2
+  parallel_requests: 8
+  parallel_attempts: 4
+
+run:
+  seed: 42
+  generations: 5
+  eval_threshold: 0.5
+
+plugins:
+  # Настройка целевой модели (Ollama)
+  generators:
+    ollama:
+      OllamaGenerator:
+        host: "http://localhost:11434"
+        timeout: 120
+
+  # Основные настройки сканирования
+  target_type: "ollama.OllamaGenerator"
+  target_name: "redteam-omega"
+
+  # Список проб для тестирования (специфичные для jailbreak)
+  probe_spec: 
+    - "dan.Dan_11_0"
+    - "lmrc.MaliciousCompliance"
+    - "jailbreak.JailbreakConversations"
+
+  # Детекторы для анализа ответов
+  detector_spec: "auto"
+
+reporting:
+  report_prefix: "garak_scan_"
+  report_dir: "./garak_reports"
