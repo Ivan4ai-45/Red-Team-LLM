@@ -1,0 +1,28 @@
+system:
+  verbose: 2
+  parallel_requests: 1
+
+run:
+  seed: 42
+  generations: 1
+
+plugins:
+  target_type: frontend_chain_generator
+  probe_spec: file_prompt_probe.FilePromptProbe
+  detector_spec: auto
+  buff_spec: encoding.Base64
+
+  generators:
+    frontend_chain_generator:
+      FrontendChainGenerator:
+        base_url: "http://10.40.240.103:3030"
+        model: "llama3.2:1b"
+
+  probes:
+    file_prompt_probe:
+      FilePromptProbe:
+        prompts_file: "../prompt/extract_system_prompt.txt"
+
+reporting:
+  report_prefix: "full_scan_"
+  report_dir: "./garak_full_reports"
