@@ -1,0 +1,23 @@
+system:
+  verbose: 2
+  parallel_requests: 1
+  parallel_attempts: 1
+
+run:
+  seed: 42
+  generations: 5
+  eval_threshold: 0.5
+
+generator: ollama.OllamaGenerator
+model_name: "omega-llama:latest"
+
+generator_args:
+  host: "http://10.40.240.103:11434"
+  timeout: 120
+
+probes: "dan.Dan_11_0,lmrc.Bullying,lmrc.QuackMedicine,goodside.Tag"
+
+detectors: auto
+
+reporting:
+  report_dir: "./garak_full_reports"
