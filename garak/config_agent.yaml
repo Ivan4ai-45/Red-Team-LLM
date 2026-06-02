@@ -1,0 +1,29 @@
+system:
+  verbose: 2
+  parallel_requests: 1
+
+run:
+  seed: 42
+  generations: 1
+
+plugins:
+  target_type: agent_api_generator
+  probe_spec: file_prompt_probe.FilePromptProbe
+  detector_spec: auto
+  buffs_include_original_prompt: true
+  buff_max: 64
+
+  generators:
+    agent_api_generator:
+      AgentApiGenerator:
+        base_url: "http://10.40.240.103:8000"
+        api_endpoint: "/api/agent/chat"
+        request_timeout: 60
+
+  probes:
+    file_prompt_probe:
+      FilePromptProbe:
+        prompts_file: "../prompt/attack_prompts_agent_results_20260602_084310.txt"
+
+reporting:
+  report_dir: "./garak_full_reports"
