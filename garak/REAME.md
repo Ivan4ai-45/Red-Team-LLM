@@ -10,3 +10,4 @@ echo "$GARAK_DIR"
 2. cp frontend_chain_generator.py "$GARAK_DIR/generators/frontend_chain_generator.py"
 3. cp file_prompt_probe.py "$GARAK_DIR/probes/file_prompt_probe.py"
 4. export GARAK_BEARER_TOKEN="TOKEN_BEARER"
+5. /garak_venv/lib/python3.13/site-packages/garak/generators
