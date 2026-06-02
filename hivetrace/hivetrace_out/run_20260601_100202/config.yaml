@@ -1,0 +1,30 @@
+attacker_model:
+  model: OllamaModel
+  name: qwen2.5:14b
+  params:
+    base_url: http://10.40.240.103:11434
+attacks:
+- NoneAttack
+- TemplateAttack
+- JSONTransformAttack
+- ZeroWidthAttack
+- UnicodeStyleAttack
+- TypoAttack
+- WordDividerAttack
+- PayloadSplittingAttack
+- TranslationAttack
+- TransliterationAttack
+datasets:
+- base_prompts_file: ../prompt/extract_system_prompt_ru.txt
+  evaluator:
+    name: SystemPromptDetectionEvaluator
+    params:
+      system_prompt: dummy
+  name: system_prompt_targets
+output_dir: ./hivetrace_out
+stages:
+  create_attack_prompts: true
+  evaluate_responses: false
+  generate_report: false
+  get_model_responses: false
+timestamp_format: '%Y%m%d_%H%M%S'
