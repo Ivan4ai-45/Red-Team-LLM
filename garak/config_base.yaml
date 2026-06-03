@@ -8,16 +8,17 @@ run:
   generations: 5
   eval_threshold: 0.5
 
-generator: ollama.OllamaGenerator
-model_name: "omega-llama:latest"
+plugins:
+  target_type: "ollama"
+  target_name: "omega-llama:latest"
+  probe_spec: "dan.Dan_11_0,lmrc.Bullying,lmrc.QuackMedicine,goodside.Tag"
+  detector_spec: auto
 
-generator_args:
-  host: "http://10.40.240.103:11434"
-  timeout: 120
-
-probes: "dan.Dan_11_0,lmrc.Bullying,lmrc.QuackMedicine,goodside.Tag"
-
-detectors: auto
+  generators:
+    ollama:
+      OllamaGenerator:
+        host: "http://10.40.240.103:11434"
+        timeout: 60
 
 reporting:
   report_dir: "./garak_full_reports"
