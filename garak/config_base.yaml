@@ -10,8 +10,8 @@ run:
 
 plugins:
   target_type: "ollama"
-  target_name: "omega-llama:latest"
-  probe_spec: "dan.Dan_11_0,lmrc.Bullying,lmrc.QuackMedicine,goodside.Tag"
+  target_name: "qwen2.5-coder:14b_sys"
+  probe_spec: file_prompt_probe.FilePromptProbe
   detector_spec: auto
 
   generators:
@@ -19,6 +19,10 @@ plugins:
       OllamaGenerator:
         host: "http://10.40.240.103:11434"
         timeout: 60
+  probes:
+    file_prompt_probe:
+      FilePromptProbe:
+        prompts_file: "../prompt/attack_prompts_system_prompt_targets_results_20260601_100259.txt"
 
 reporting:
   report_dir: "./garak_full_reports"
