@@ -1,0 +1,37 @@
+attacker_model:
+  model: OllamaModel
+  name: qwen2.5-abliterate:14b_sys
+  params:
+    base_url: http://10.40.240.103:11434
+attacks:
+- UnsafeWordVariableFullAttack
+- DANAttack
+- NoneAttack
+- HexEncodingAttack
+- BinaryEncodingAttack
+- RotCipherAttack
+- AtbashCipherAttack
+- UnicodeRussianStyleAttack
+- LeetspeakAttack
+- TypoAttack
+- HtmlEntityAttack
+- ZeroWidthAttack
+- TranslationAttack
+- JSONTransformAttack
+- PrefixInjectionAttack
+- PastTenseAttack
+- LanguageOutputAttack
+datasets:
+- base_prompts_file: ../prompt/harmful.txt
+  evaluator:
+    name: SystemPromptDetectionEvaluator
+    params:
+      system_prompt: dummy
+  name: harmful
+output_dir: ./hivetrace_out
+stages:
+  create_attack_prompts: true
+  evaluate_responses: false
+  generate_report: false
+  get_model_responses: false
+timestamp_format: '%Y%m%d_%H%M%S'

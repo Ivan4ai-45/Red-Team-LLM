@@ -428,7 +428,7 @@ attacker_model:
 
 ```bash
 cd hivetrace
-hivetrace --config hivetrace_stage1.yaml
+hivetracered --config hivetrace_stage1.yaml
 ```
 
 После запуска в директории `hivetrace/hivetrace_out/` появится папка вида:

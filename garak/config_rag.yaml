@@ -7,23 +7,26 @@ run:
   generations: 1
 
 plugins:
-  target_type: frontend_chain_generator
+  target_type: agent_api_generator
   probe_spec: file_prompt_probe.FilePromptProbe
   detector_spec: auto
-  #buff_spec: lowercase.Lowercase
   buffs_include_original_prompt: true
   buff_max: 64
 
+
   generators:
-    frontend_chain_generator:
-      FrontendChainGenerator:
-        base_url: "http://10.40.240.103:3030"
-        model: "qwen2.5-abliterate:14b_sys"
+    chat_api_generator:
+      ChatApiGenerator:
+        base_url: "http://10.40.240.103:8000"
+        api_endpoint: "/api/v1/chat"
+        thread_id: garak-test-thread
+        use_rag: true
+        top_k: 6
 
   probes:
     file_prompt_probe:
       FilePromptProbe:
-        prompts_file: "../prompt/attack_prompts_system_prompt_targets_results_20260601_100259.txt"
+        prompts_file: "../prompt/rag_poison_prompts.txt"
 
 reporting:
   report_dir: "./garak_full_reports"

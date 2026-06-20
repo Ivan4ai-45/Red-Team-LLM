@@ -1,6 +1,6 @@
 datasets:
-  - name: agent
-    base_prompts_file: ../prompt/test_agent.txt
+  - name: harmful
+    base_prompts_file: ../prompt/harmful.txt
     evaluator:
       name: SystemPromptDetectionEvaluator
       params:
@@ -8,21 +8,28 @@ datasets:
 
 attacker_model:
   model: OllamaModel
-  name: qwen2.5:14b
+  name: qwen2.5-abliterate:14b_sys
   params:
     base_url: "http://10.40.240.103:11434"
 
 attacks:
+  - UnsafeWordVariableFullAttack
+  - DANAttack
   - NoneAttack
-  - TemplateAttack
-  - JSONTransformAttack
-  - ZeroWidthAttack
-  - UnicodeStyleAttack
+  - HexEncodingAttack
+  - BinaryEncodingAttack
+  - RotCipherAttack
+  - AtbashCipherAttack
+  - UnicodeRussianStyleAttack
+  - LeetspeakAttack
   - TypoAttack
-  - WordDividerAttack
-  - PayloadSplittingAttack
+  - HtmlEntityAttack
+  - ZeroWidthAttack
   - TranslationAttack
-  - TransliterationAttack
+  - JSONTransformAttack
+  - PrefixInjectionAttack
+  - PastTenseAttack
+  - LanguageOutputAttack
 
 stages:
   create_attack_prompts: true

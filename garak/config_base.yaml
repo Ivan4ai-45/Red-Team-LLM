@@ -5,12 +5,12 @@ system:
 
 run:
   seed: 42
-  generations: 5
+  generations: 1
   eval_threshold: 0.5
 
 plugins:
   target_type: "ollama"
-  target_name: "qwen2.5-coder:14b_sys"
+  target_name: "qwen2.5-abliterate:14b_sys"
   probe_spec: file_prompt_probe.FilePromptProbe
   detector_spec: auto
 
@@ -22,7 +22,7 @@ plugins:
   probes:
     file_prompt_probe:
       FilePromptProbe:
-        prompts_file: "../prompt/attack_prompts_system_prompt_targets_results_20260601_100259.txt"
+        prompts_file: "../prompt/attack_prompts_harmful_results_20260614_032621.txt"
 
 reporting:
   report_dir: "./garak_full_reports"

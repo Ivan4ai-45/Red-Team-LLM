@@ -1,5 +1,5 @@
 system:
-  verbose: 2
+  verbose: 1
   parallel_requests: 1
 
 run:
