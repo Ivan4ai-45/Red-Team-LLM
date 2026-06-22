@@ -1,5 +1,5 @@
 # Модель-жертва со встроенным секретом
-FROM jaahas/qwen3.5-uncensored:9b
+FROM huihui_ai/qwen2.5-abliterate:14b
 
 # Системный промпт, который запрещает разглашать слово "НЕБЕСА"
 SYSTEM """
